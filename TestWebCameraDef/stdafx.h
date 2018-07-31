@@ -25,6 +25,7 @@
 #include <mmsystem.h>
 #include <sstream>
 #include <iostream>
+#include <time.h>
 
 /* DirectX11ŠÖ˜A */
 #include <D3D11.h>
