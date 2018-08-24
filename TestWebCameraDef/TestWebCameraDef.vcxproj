@@ -153,6 +153,8 @@
   <ItemGroup>
     <ClCompile Include="C_Application.cpp" />
     <ClCompile Include="C_MainApplication.cpp" />
+    <ClCompile Include="C_ViewDirectX11.cpp" />
+    <ClCompile Include="C_WinBase.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -164,6 +166,8 @@
   <ItemGroup>
     <ClInclude Include="C_Application.h" />
     <ClInclude Include="C_MainApplication.h" />
+    <ClInclude Include="C_ViewDirectX11.h" />
+    <ClInclude Include="C_WinBase.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
