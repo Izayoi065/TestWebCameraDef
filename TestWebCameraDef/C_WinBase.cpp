@@ -12,6 +12,8 @@
 // staticメンバ変数の定義.
 std::map<HWND, C_WinBase *> C_WinBase::m_mapWindowMap;	// staticメンバ変数C_WinBase::m_mapWindowMapは宣言と別にここに定義しないといけない.
 
+INT_PTR CALLBACK    Dialog(HWND, UINT, WPARAM, LPARAM);
+
 /* コンストラクタ C_WinBase */
 C_WinBase::C_WinBase(CApplication * pApp) {
 	// メンバの初期化
@@ -156,6 +158,29 @@ LRESULT C_WinBase::DynamicWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 	}
 	// 既定の処理
 	break;
+	case WM_COMMAND:
+	{
+		int wmId = LOWORD(wParam);
+		// 選択されたメニューの解析:
+		switch (wmId)
+		{
+		case IDM_EXIT:
+		{
+			// OnDestroyに任せる.
+			OnDestroy();	// OnDestroyを呼ぶ
+		}
+		// 既定の処理
+		break;
+		case IDM_ABOUT:
+		{
+			DialogBox(C_WinBase::m_mapWindowMap[hwnd]->m_pApp->m_hInstance, MAKEINTRESOURCE(IDD_ABOUTBOX), C_WinBase::m_mapWindowMap[hwnd]->m_hWnd, Dialog);
+		}
+		// 既定の処理
+		break;
+		}
+	}
+	// 既定の処理
+	break;
 	/* その他 */
 	default:
 	{
@@ -167,4 +192,24 @@ LRESULT C_WinBase::DynamicWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 
 	// DefWindowProcに任せる.
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+// バージョン情報ボックスのメッセージ ハンドラーです。
+INT_PTR CALLBACK Dialog(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	UNREFERENCED_PARAMETER(lParam);
+	switch (message)
+	{
+	case WM_INITDIALOG:
+		return (INT_PTR)TRUE;
+
+	case WM_COMMAND:
+		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+		{
+			EndDialog(hDlg, LOWORD(wParam));
+			return (INT_PTR)TRUE;
+		}
+		break;
+	}
+	return (INT_PTR)FALSE;
 }
