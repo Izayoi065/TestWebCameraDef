@@ -8,6 +8,7 @@
 
 class CApplication {
 public:
+	/* publicメンバ変数 */
 	/* publicメンバ関数 */
 	CApplication();				// コンストラクタ
 	virtual ~CApplication();	// デストラクタ
